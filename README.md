@@ -1,6 +1,7 @@
 # Python
 Learn Python 3
 
+https://github.com/Codecademy/learn-python 
 
 Senior Curriculum Developer: Sonny Li (sonny@codecademy.com) alt text alt text
 
