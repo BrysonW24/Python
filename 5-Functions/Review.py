@@ -13,3 +13,34 @@
     # How we can reuse function output with the return keyword, as well as multiple returns.
     # Where variables can be accessed in our programs that use functions
     # Let’s practice putting all these concepts together!
+
+def trip_planner_welcome(name):
+  print('Welcome to tripplanner v1.0 ' + name)
+
+trip_planner_welcome('Bryson')
+
+def estimated_time_rounded(estimated_time):
+  rounded_time = round(estimated_time)  
+  return rounded_time
+
+estimate = estimated_time_rounded(2.5)
+
+def destination_setup(origin, destination, estimated_time, mode_of_transport = 'Car'):
+  print('Your trip starts off in ' + origin)
+  print('And you are traveling to ' + destination)
+  print('You will be traveling by ' + mode_of_transport)
+  print('It will take approximately ' + str(estimated_time) + ' hours')
+
+destination_setup('Australia', 'England', estimate)
+
+
+-----------------------------
+
+
+**OUTPUT**
+
+Welcome to tripplanner v1.0 Bryson
+Your trip starts off in Australia
+And you are travelling to England
+You will be travelling by Car
+It will take approximately 2 hours
