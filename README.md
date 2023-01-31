@@ -15,7 +15,7 @@ Moreover, the world of AI has come so far since the 1940-50's... with still so m
 
 Some books I have thoroughly enjoyed, inspiring me to embark on such a journey are the following:
 > Life 3.0, Max Tegmark (2017)
->> This book deeply moved me, I remember listening to this for the first time on Audible by Amazon in the car coming home from Forster. I barely moved an inch, or spoke a word along the entire 4 hours of my journey (aside from the odd "Wow" or "Geeeez" when it hit deep). The Tale of the OMEGA team can be found either in a pretty cool video put together on Youtube: https://youtu.be/ttZSk7rmFvc, or in text form here: https://www.marketingfirst.co.nz/storage/2018/06/prelude-life-3.0-tegmark.pdf
+>> This book deeply moved me, I remember listening to this for the first time on Audible by Amazon in my car driving home on my own from Forster, NSW, Australia. I remember barely moving an inch, or speaking a word along the entire 4 hours of my journey (aside from the odd "Wow" or "Geeeez" when the hook landed). The Tale of the OMEGA team is a brilliant way to get a quick download of what the book is generally about. This can be found either in a pretty cool video put together on Youtube: https://youtu.be/ttZSk7rmFvc, or in text form here: https://www.marketingfirst.co.nz/storage/2018/06/prelude-life-3.0-tegmark.pdf
 
 > Mind Children, Hans Moravec (1988)
 >> Astonishinly forsighted book, with wonderful detail of how computers began to where they can one day have capacity to take us. I realised I have a genuine interest in how things came to be the way they are, history has always fascintated me - and this book delivered on all fronts. 
