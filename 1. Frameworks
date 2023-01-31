@@ -1,0 +1,64 @@
+# This space is reserved for code on Frameworks
+
+There are several types of frameworks in Python including:
+
+Web frameworks (Django, Flask, Pyramid, etc.)
+Scientific computing frameworks (NumPy, SciPy, etc.)
+Machine learning frameworks (TensorFlow, PyTorch, etc.)
+Desktop GUI frameworks (PyQt, wxPython, etc.)
+Gaming frameworks (Pygame, etc.)
+
+---------------------------------
+
+Django: import django
+Flask: from flask import Flask
+Pyramid: from pyramid.config import Configurator
+Tornado: import tornado.ioloop
+FastAPI: from fastapi import FastAPI
+CherryPy: import cherrypy
+Web2py: from gluon import *
+Bottle: from bottle import Bottle, run
+Sanic: from sanic import Sanic
+
+---------------------------------
+https://www.interviewbit.com/blog/python-frameworks/ 
+
+Data Science:
+Here are the import codes for the most popular Python frameworks for data science:
+
+> NumPy: import numpy as np
+> SciPy: import scipy
+> Pandas: import pandas as pd
+> Matplotlib: import matplotlib.pyplot as plt
+> Seaborn: import seaborn as sns
+> Plotly: import plotly.express as px
+> TensorFlow: import tensorflow as tf
+> PyTorch: import torch
+> Keras: import keras
+> Scikit-learn: import sklearn
+> XGBoost: import xgboost as xgb
+> LightGBM: import lightgbm as lgb
+> CatBoost: import catboost
+> Statsmodels: import statsmodels.api as sm
+> Prophet: from fbprophet import Prophet
+
+Please note that these import codes may vary depending on the specific version and installation of each framework.
+
+Small applications/Micro-framwork:
+> Bottle (building small web apps)
+> Flask (building web apps)
+> CherryPy (Python apps, multithreaded server embedded)
+> Dash (analytical web apps)
+> Falcon (building web APIs)
+
+Asyncronous framewpork:
+> Aiohttp (based on async and await)
+> Growler (based on NodeJS, used to connect - middleware)
+
+Full-stack category framework:
+> Django (DRY - Dont Repeat Yourself - connecting DBs)
+> Cubic Web (Use cubes instead of seperate models and views)
+> Giotto (build apps - allows developer and system admin isolation)
+
+Here's the import code for each of the Python frameworks:
+
