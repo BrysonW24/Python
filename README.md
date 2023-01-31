@@ -4,11 +4,11 @@ This is a personal repository to display some of the important concepts of the P
 
 I intend to build out a comphrehensive repository, encapsulating repeatable steps to improve efficiency with designated source code ready to roll. 
 
-Short-Term
-This project is taking place as I am learning more about Python, currently within my first 3 months of being introduced to the language, and looking to pivot my career into something which carries with it a substance for solving problems with code (Software Engineering / Data Science). I intend to house key concepts kept here. 
+>Short-Term
+>>This project is taking place as I am learning more about Python, currently within my first 3 months of being introduced to the language, and looking to pivot my career into something which carries with it a substance for solving problems with code (Software Engineering / Data Science). I intend to house key concepts kept here. 
 
-Long-Term
-My long-term goal is to work on AI and Machine Learning projects, lending a helping hand into the revolution in the information age on Earth.
+>Long-Term
+>>My long-term goal is to work on AI and Machine Learning projects, lending a helping hand into the revolution in the information age on Earth.
 I have a vision that I want to be apart of future interstellar projects, stretching outside of Earths atmosphere, and then Solar System. 
 I beleive there is so much we now know to push humanity into a highly advantagoues position among the stars to prevent catastrophic extinction. 
 Moreover, the world of AI has come so far since the 1940-50's... with still so much we don't know, and with AI being the next frontier, I can only see myself taking part in perhaps the most important development our species has ever worked on - artificial general intelligence.
