@@ -5,7 +5,7 @@ This is a personal repository to display some of the important concepts of the P
 I intend to build out a comphrehensive repository, encapsulating repeatable steps to improve efficiency with designated source code. 
 
 >Short-Term
->>This project is taking place as I am learning more about Python, currently within my first 3 months of being introduced to the language, and looking to pivot my career into something which carries with it a substance for solving problems with code (Software Engineering / Data Science). I intend to house key concepts kept here. 
+>>This project is taking place as I am learning more about Python, currently within my first 3 months of being introduced to the language, and looking to pivot my career into something which carries with it a substance for solving problems with code (Software Engineering / Data Science). I intend to house key concepts here. 
 
 >Long-Term
 >>My long-term goal is to work on AI and Machine Learning projects, lending a helping hand into the revolution in the 'information age'.
