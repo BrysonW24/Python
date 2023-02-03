@@ -18,7 +18,7 @@ Moreover, the world of AI has come so far since the 1940-50's... with still so m
 >>>B) To eradicate diseases,  
 >>>>C) To travel and explore space, 
 >>>>>D) Minimise road death to zero, 
->>>>>>E) Prevent Animal Extinction through tracking,
+>>>>>>E) Prevent all animal extinction,
 >>>>>>>F) Build a Superintelligent assistant.
 
 >Now what if I told you that one of these could solve all of the other issues we face in one fell swoop - if you chose F) you'd be correct.
