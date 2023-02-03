@@ -14,7 +14,7 @@ I believe there is so much capability to be apart of enabling education for all 
 Moreover, the world of AI has come so far since the 1940-50's... with still so much we don't know, and with AI being the next frontier, taking part in perhaps the most important development that our species has ever worked on - I want to be apart of the conversation as we develop closer and closer to levels of AGI (artificial general intelligence) and a key reason for shifting into this kind of work. 
 
 >An exercise I ponder, answer this for yourself: If the human race could do one of these, which would you choose? 
->>A) A long life, 
+>>>A) A long life, 
 >>B) To travel and explore space, 
 >>C) To eradicate diseases, 
 >>D) Zero deaths via Public Transport, 
