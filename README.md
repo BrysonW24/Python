@@ -15,9 +15,9 @@ Moreover, the world of AI has come so far since the 1940-50's... with still so m
 
 >An exercise I ponder, answer this for yourself: If the human race could do one of these, which would you choose? 
 >>A) A long life, 
->>>B) To travel and explore space, 
->>>>C) To eradicate diseases, 
->>>>>D) Zero deaths via Public Transport, 
+>>>B) To eradicate diseases,  
+>>>>C) To travel and explore space, 
+>>>>>D) Minimise road death to zero, 
 >>>>>>E) Prevent Animal Extinction through tracking,
 >>>>>>>F) Build a Superintelligent assistant.
 
