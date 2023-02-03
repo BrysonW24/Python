@@ -20,7 +20,8 @@ Moreover, the world of AI has come so far since the 1940-50's... with still so m
 >>>>>D) Zero deaths via Public Transport, 
 >>>>>>>E) Prevent Animal Extinction through tracking
 >>>>>>>>F) Build a Superintelligent assistant
->>And what if I told you that one of these could solve all of the other issues we face in one fell swoop - if you chose F) you'd be correct.
+
+>And what if I told you that one of these could solve all of the other issues we face in one fell swoop - if you chose F) you'd be correct.
 
 Some books I have thoroughly enjoyed, inspiring me to embark on such a journey are the following:
 > Life 3.0, Max Tegmark (2017)
