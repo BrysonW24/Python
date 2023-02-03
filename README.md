@@ -10,7 +10,7 @@ I intend to build out a comphrehensive repository, encapsulating repeatable step
 >Long-Term
 >>My long-term goal is to work on AI and Machine Learning projects, lending a helping hand into the revolution in the 'information age'.
 I have a vision of working on future interstellar projects, stretching from Earths atmosphere, to beyond.
-I believe there is so much we now know to push humanity into a a far more promising position to enable education for all people on Earth, minimise hunger, build dearly needed facilities and homes using data to help us amalgamate data flows and help to provide a tangible outcomes for people across the planet.
+I believe there is so much capability to be apart of enabling education for all people on Earth, minimising hunger, building dearly needed facilities and homes, working on highly technical exploratory missions both on Earth and through the Solar system. All of this at various times in my life I intend to offer my service to, using data to help us amalgamate data flows and help to provide a tangible outcomes for people across the planet.
 Moreover, the world of AI has come so far since the 1940-50's... with still so much we don't know, and with AI being the next frontier, taking part in perhaps the most important development that our species has ever worked on - artificial general intelligence is key reason for shifting into this kind of work.
 
 Some books I have thoroughly enjoyed, inspiring me to embark on such a journey are the following:
