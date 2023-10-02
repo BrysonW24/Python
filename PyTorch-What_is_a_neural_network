@@ -1,0 +1,119 @@
+# What is a neural network
+A neural network is a collection of neurons that are connected by layers. Each neuron is a small computing unit that performs simple calculations to collectively solve a problem. Neurons are organized in 3 types of layers: input layer, hidden layer, and output layer. The hidden and output layers contain a number of neurons. Neural networks mimic the way a human brain processes information.
+
+## Components of a neural network
+• An activation function determines whether a neuron should be activated or not. The computations that happen in a neural network include applying an activation function. If a neuron activates, then it means the input is important. There are different kinds of activation functions. The choice of which activation function to use depends on what you want the output to be. Another important role of an activation function is to add non-linearity to the model.
+
+	• Binary is used to set an output node to 1 if the function result is positive and 0 if the function result is zero or negative. f(x)={0,1,​if x<0if x≥0​
+
+	• Sigmoid is used to predict the probability of an output node being between 0 and 1. f(x)=1+e−x1​
+
+	• Tanh is used to predict whether an output node is between 1 and -1, for classification use cases. f(x)=ex+e−xex−e−x​
+	
+	• ReLU (rectified linear activation function) is used to set the output node to 0 if the function result is negative and keeps the result value if the result is a positive value. f(x)={0,x,​if x<0if x≥0​
+
+
+• Weights influence how close the output of our network is to the expected output value. As an input enters the neuron, it gets multiplied by a weight value and the resulting output is either observed, or passed to the next layer in the neural network. Weights for all neurons in a layer are organized into one tensor.
+• Bias makes up the difference between the activation function's output and its intended output. A low bias suggest that the network is making more assumptions about the form of the output, whereas a high bias value makes fewer assumptions about the form of the output.
+• We can say that an output y of a neural network layer with weights W and bias b is computed as summation of the inputs multiplied by the weights plus the bias. 
+• x=∑(weights∗inputs)+bias, where f(x) is the activation function.
+
+
+## Build a neural network
+Neural networks are comprised of layers and modules that perform operations on data. The torch.nn namespace provides all the building blocks you'll need to build your own neural network. Every module in PyTorch subclasses nn.Module. A neural network is itself a module that consists of other modules (layers). This nested structure allows for building and managing complex architectures easily.
+In the following sections, we'll build a neural network to classify images in the FashionMNIST dataset.
+
+%matplotlib inline
+import os
+import torch
+from torch import nn
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+
+## Get a hardware device for training
+We want to be able to train our model on a hardware accelerator like a GPU, if one is available. Let's check to see whether torch.cuda is available; if not, we'll continue to use the CPU.
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print('Using {} device'.format(device))
+
+
+## Define the class
+We define our neural network by subclassing nn.Module, and initialize the neural network layers in __init__. 
+Every nn.Module subclass implements the operations on input data in the forward method.
+
+Our neural network is composed of the following:
+	• The input layer with 28x28 or 784 features/pixels.
+	• The first linear module takes the input 784 features and transforms it to a hidden layer with 512 features.
+	• The ReLU activation function will be applied in the transformation.
+	• The second linear module takes 512 features as input from the first hidden layer and transforms it to the next hidden layer with 512 features.
+	• The ReLU activation function will be applied in the transformation.
+	• The third linear module take 512 features as input from the second hidden layer and transforms those features to the output layer with 10, which is the number of classes.
+	• The ReLU activation function will be applied in the transformation.
+
+class NeuralNetwork(nn.Module):
+    def __init__(self):
+        super(NeuralNetwork, self).__init__()
+        self.flatten = nn.Flatten()
+        self.linear_relu_stack = nn.Sequential(
+            nn.Linear(28*28, 512),
+            nn.ReLU(),
+            nn.Linear(512, 512),
+            nn.ReLU(),
+            nn.Linear(512, 10),
+            nn.ReLU()
+        )
+    def forward(self, x):
+        x = self.flatten(x)
+        logits = self.linear_relu_stack(x)
+        return logits
+
+We create an instance of NeuralNetwork, and move it to the device, and print its structure.
+
+model = NeuralNetwork().to(device)
+print(model)
+
+To use the model, we pass it the input data. This executes the model's forward, along with some background operations. 
+However, do not call model.forward() directly! Calling the model on the input returns a 10-dimensional tensor with raw predicted values for each class.
+We get the prediction densities by passing it through an instance of the nn.Softmax.
+
+X = torch.rand(1, 28, 28, device=device)
+logits = model(X) 
+pred_probab = nn.Softmax(dim=1)(logits)
+y_pred = pred_probab.argmax(1)
+print(f"Predicted class: {y_pred}")
+
+## Weight and Bias
+The nn.Linear module randomly initializes the weights and bias for each layer and internally stores the values in Tensors.
+
+print(f"First Linear weights: {model.linear_relu_stack[0].weight} \n")
+print(f"First Linear biases: {model.linear_relu_stack[0].bias} \n")
+
+
+## Model layers
+Let's break down the layers in the FashionMNIST model. To illustrate it, we will take a sample minibatch of 3 images of size 28x28 and see what happens to it as we pass it through the network.
+
+## nn.Flatten
+We initialize the nn.Flatten layer to convert each 2D 28x28 image into a contiguous array of 784 pixel values, that is, the minibatch dimension (at dim=0) is maintained. Each of the pixels are passed to the input layer of the neural network.
+https://au.mathworks.com/help/images/structuring-elements.html
+
+## nn.Linear
+The linear layer is a module that applies a linear transformation on the input using its stored weights and biases. The grayscale value of each pixel in the input layer will be connected to neurons in the hidden layer for calculation. The calculation used for the transformation is weight∗input+bias.
+
+torch.Size([3, 20])
+
+## nn.ReLU
+Non-linear activations are what create the complex mappings between the model's inputs and outputs. They are applied after linear transformations to introduce nonlinearity, helping neural networks learn a wide variety of phenomena. In this model, we use nn.ReLU between our linear layers, but there's other activations to introduce non-linearity in your model.
+The ReLU activation function takes the output from the linear layer calculation and replaces the negative values with zeros.
+Linear output: x=weight∗input+bias.
+ReLU: f(x)={0,x,​if x<0if x≥0​
+
+# nn.Sequential
+nn.Sequential is an ordered container of modules. The data is passed through all the modules in their defined order. You can use sequential containers to put together a quick network like seq_modules.
+
+From <https://aznb-ame-prod.azureedge.net/component/1.6.36/markdown-iframe.html> 
+
+## nn.Softmax
+The last linear layer of the neural network returns logits (the raw values in [-infty, infty]), which are passed to the nn.Softmax module. 
+The Softmax activation function is used to calculate the probability of the output from the neural network. 
+It is only used on the output layer of a neural network. The results are scaled to values [0, 1] representing the model's predicted densities for each class. 
+The dim parameter indicates the dimension along which the result values must sum to 1. The node with the highest probability predicts the desired output
