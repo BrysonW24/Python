@@ -1,0 +1,55 @@
+#---
+
+# Source
+def var_1():
+    return "CEE"
+# Audience_group
+def var_2():
+    return "AI"
+# Milestone_detail
+def var_3():
+    return loaded_df.at[0, "Milestone"]
+# Product_category
+def var_4():
+    return "NA"
+    #return AEM_input_clean.at[0,"Product"]
+# NBC_name
+def var_5():
+    return loaded_df.at[0, "NBC "]
+# Location
+def var_6():
+    return loaded_df.at[0, "Location"]
+# Segment
+def var_7():
+    # for segment in segments:
+    return loaded_df.at[0, "Segment"]
+
+#---
+
+def generate_aem_links():
+    source = var_1()
+    audience_group = var_2()
+    milestone_detail = var_3()
+    product_category = var_4()
+    nbc_name = var_5()
+    location = var_6()
+    segment = var_7()
+
+     # Take segments from DF, turn it into a list
+    segments = loaded_df["Segment Code"].tolist() # selecting "Segment Code" column from Dataframe
+
+    ## Total assets required for this initiaitve is defined by the length (len) or number of segments counted in the previous "segments" variable
+    assets_total = len(segments)
+    
+    ## Initialising the counter for the number of assets to generate
+    assets_generated = 0
+
+    dynamic_assets = []
+
+    while assets_generated < assets_total:
+        dynamic_asset = f"{source}-{audience_group}-{milestone_detail}-{product_category}-{nbc_name}-{location}-{segment}"
+        dynamic_assets.append(dynamic_asset)
+        assets_generated += 1
+        print(f"{dynamic_asset}")
+    
+    print("\n Count of segments: ", assets_total)
