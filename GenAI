@@ -91,6 +91,36 @@ NBC_metadata()
 
 # =======================
 
+counter = 0
+
+# Source
+def var_1():
+    return "CEE"
+# Audience_group
+def var_2():
+    return "AI"
+# Milestone_detail
+def var_3():
+    return AEM_input_clean.at[0,"Milestone"]
+# Product_category
+def var_4():
+    return "NA"
+    #return AEM_input_clean.at[0,"Product"]
+# NBC_name
+def var_5():
+    return AEM_input_clean.at[0,"NBC "]
+# Location
+def var_6():
+    return AEM_input_clean.at[0,"Location"]
+# Segment
+def var_7():
+    # for segment in segments:
+    return "Test"
+
+# =======================
+
+# =======================
+
 # Populating the assets
 
 # Get AEM Links ready or export
