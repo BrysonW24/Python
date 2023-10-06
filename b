@@ -58,3 +58,22 @@ final_generate_links_df = pd.DataFrame(data=final_generate_links)
 print(final_generate_links_df)
 
 #====================================
+
+# Creating a dictionary to store the static data for this step - DataFrame columns
+static_data = {
+    "jcr:primaryType": "cq:Page",
+    "jcr:content/jcr:primaryType": "cq:PageContent",
+    "jcr:content/cq:template": "/apps/activity-feeds/templates/activity-feeds-content-template",
+    "jcr:content/sling:resourceType": "/apps/activity-feeds/components/page/contentpagecomponent",
+    "jcr:content/jcr:title": final_df["BID_Links"], #calling from "def generate_links(self):"
+    "jcr:content/dataImporter": "true"
+}
+
+# Creating the DataFrame
+df1 = pd.DataFrame(static_data)
+
+# Adding the 'path' column with our previously generated AEM links -- calling from "def generate_links(self):"
+df1.insert(0, "path", original_df["Draft_Path"])
+
+# Printing the dataframe
+print(df1)
