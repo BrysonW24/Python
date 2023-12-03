@@ -1,3 +1,12 @@
+Use Case #1: iSource
+Our Customer Service Direct (CSD) team handles inbound calls from CommBank customers. The team listens to customer queries over the phone, interprets the query in the context of the bank's products and then searches over 4,000 pages for Standard Operating Procedure documents (SOPs) stored on iSource, which is our internal repository for all knowledge.
+
+When it comes to achieving NPS +30, it is important to transfer customers to the right product specialist team on the first attempt. Concierge Agents are the first people that customers speak to on the phone when calling the bank. It is up to the Concierge Agent to transfer calls to the right department. The challenge is that customer calls can be difficult to interpret and categorise by the Concierge Agents as customers will use different language than we do internally to describe what they need our help with. Additionally, there are dozens of different places to transfer customer calls in the form of our specialist customer service departments which are experts in their particular product or service.
+
+CommBank Gen.ai Studio consumes iSource data and indexes this wealth of information in a searchable format. Concierge Agents then asks the Gen.ai tool which team a customer query needs to be transferred next in order to provide a speedy result for the customer with a high level of accuracy. Testing has revealed that Gen.ai can achieve highly accurate outcomes for Concierge Agents in remarkably short time. The first Proof of Concept (POC) demonstrated 6X uplift in accuracy scores in just 3 weeks, for the tool's responses.
+
+We have just scratched the surface of it in 3 months, as Gen.ai and CSD continue to scale and iterate upon this capability and works towards consuming all of the available iSource data which helps us provide accurate and speedy service to our customers Australia wide.
+
 Commonwealth Bank of Australia (CBA) has embarked on a preliminary study to examine how well generative AI (GenAI) chatbots could emulate the behaviours of customers and be used as an early experimentation tool, ultimately to allow the bank to rapidly test, expand and improve its products and services.
 
 At South by Southwest Sydney 2023 last week, CBA Chief Decision Scientist Dan Jermyn said: “Generative AI enables machines to process, interpret and use patterns to create new outputs. We’re using this advanced technology to explore creating customer personas or ‘synthetic agents’, where GenAI chatbots act as an early experimentation tool.
