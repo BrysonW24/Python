@@ -29,6 +29,204 @@ Mr Jermyn said CBA’s AI and behavioural science teams were currently collabora
 
 “Basically, it’s about creating a safe and even smarter way of developing products and services for customers. It’s very much early days but we’re really interested about the potential opportunities GenAI has to improve customer outcomes,” said Mr Jermyn.
 
+Purpose and scope
+Purpose The Group has an obligation to protect information. Third-party information
+security is a set of principles that mitigate information security risks brought
+by Third Parties to Group Information.
+The purpose of this Guideline is to provide and assist with cyber security
+centric considerations on the use of unmanaged third-party Artificial
+Intelligence (AI) Chatbot services (AI Chatbot) built on language centric
+generative AI algorithms.
+Examples include but not limited to:
+• OpenAI ChatGPT;
+• Google Bard; and
+• External services providing generative AI based on large language
+models.
+This guidance paper excludes:
+• Third-party AI Chatbots where the Group has a direct contractual
+relationship with a supplier that has been formally assessed and
+onboarded in accordance with relevant Policies and Standards; and
+• AI systems and language models governed by Group model risk and
+supplier arrangements in accordance with relevant Policies and
+Standards.
+This guidance supports the following Group Policy and Standards:
+• Group Information Security (IS) Policy;
+• Group AI Policy;
+• Group Model Risk Policy;
+• Group supplier Lifecycle Policy;
+• IS third-party Security Standard; and
+• IS Classification and Handling Standard.
+Key considerations when assessing the use of third-party AI Chatbot
+services include:
+• Loss of data confidentiality;
+• Loss of data integrity;
+• Loss of system and data availability;
+• Damage to the Group’s reputation; and
+• Financial loss.
+
+Scope This FAQ guidance paper applies to Business Units (BUs) and associated
+support functions at the Commonwealth Bank of Australia only.
+All other entities and/or regions should establish their own guidelines
+specific to their operating environments and region.
+Introduction
+Overview Emergent AI technologies are enabling new ways for us to engage,
+manipulate and interact with digital information expressed through
+language, visual and audio.
+As the pace of technology advancement opens new opportunities, the
+Group must continually consider organisational, regulatory, legal, and
+ethical safeguards to maintain our obligations and values.
+Group Cyber
+Position
+The current Group Cyber position welcomes staff to investigate and
+explore potential opportunities of business benefit using generative AI
+Chatbots in a manner that actively demonstrates consideration to operate
+within the Group’s risk appetite and Standards.
+Non-Negotiable:
+When using AI Chatbots where there is no direct contractual relationship
+with the third-party supplier or Group model risk governance, data or
+queries transmitted to the service must not exceed information
+classification – Public, as defined in the IS Classification and Handling
+Standard.
+Third-party AI Chatbots that have been assessed and fall outside the
+Group’s current risk appetite may be blocked to protect the Group’s
+interests.
+Should a third-party AI Chatbot be blocked, persons engaged by the Group
+are expected to operate in accordance with the Group Conduct Policy and
+Code of Conduct.
+Generative AI
+Chatbots
+Generative AI refers to a broad category of machine learning (ML)
+algorithms that draw upon large datasets of information to create new
+forms of content.
+Significant advancements in language centric generative AI have led to
+emergent AI Chatbot services that are able to take a user’s request and generate detailed natural text responses that may be near indistinguishable from human generated content.
+Examples of output include (but not limited to):
+• Essays, summaries, and speeches;
+• Communication campaigns;
+• Translation services;
+• Reports aggregating large datasets;
+• Generating program source code; and
+• Debugging program source code.
+Identified Risks
+Cyber risks Key cyber security risks associated with using unmanaged third-party AI
+Chatbots include:
+• Legal Protection:
+- The Group has not entered into formal supplier arrangements with
+the supplier of the AI Chatbot. As a result, Group Information
+transmitted to a third-party via the AI Chatbot is not protected by
+formal contractual arrangements.
+• Security Assurance:
+- The Group has not conducted formal cyber security due diligence
+over the AI Chatbot’s supplier. As a result, there is no assurance
+that Group Information will be protected.
+• Confidentiality:
+- Generative AI language models are trained on large datasets from
+a variety of sources harvested by the provider. This may include
+data submitted by users, inclusive of Group Information submitted
+to an AI Chatbot. The provider may choose not to disclose their
+datasets or delete previously harvested information. As a result,
+Group Information may be stored indefinitely or shared with other
+users of the AI Chatbot.
+• Data Sovereignty:
+- Emergent generative AI services may be owned by parent
+companies (or state-owned holding companies) domiciled in
+countries or regions under sanctions, displaying geopolitical
+tension, holding an elevated cyber threat assessment or with
+unacceptable data privacy regulation. As a result, Group
+Information may be disclosed to organisations or nation states that
+pose a threat to the Group or be in breach of Australian laws,
+including privacy laws.
+Based on the identified cyber risks, data or queries transmitted to the
+service must not exceed information classification – Public.
+
+Non-cyber risks To protect the Group’s interests, consideration must be given to both
+current identified and potential future state risk that may arise with the
+continued development of generative AI capability.
+Potential risks with AI Chatbot output may include (but not limited to) the
+following considerations:
+• Misinformation or results not reflective of latest evidence:
+- ML algorithms may be analysing a closed dataset and not directly
+feeding from real-time information. Due to this, AI Chatbot
+responses may be incorrect.
+- Due to the ability to generate human-like responses, AI Chatbots
+have the potential to ‘confidently’ provide misinformation, without
+flagging if a response was based on limited data.
+- Providers have noted AI Chatbots may at times “hallucinate.”
+generating results that may not be reflective or relevant to the
+submitted query.
+• Limited understanding of external factors or contextual considerations:
+- ML algorithms are trained to generate responses based on textual
+patterns, without understanding of context or meaning.
+- Results may not be reflective of real-time external factors that are
+not accounted for in the dataset being drawn upon.
+- Results may lack contextual considerations such as localised legal,
+regulatory, organisational, or cultural norms that may be relevant to
+the query.
+• Unethical or unacceptable bias:
+- Large language models are trained on large datasets that may
+contain biases, which may be reflected in generated content.
+- Providers may potentially choose to monetise their AI Chatbot
+services, with results reflecting paid, sponsored, or incentivised
+content.
+- Providers may potentially censor or bias results to reflect
+geopolitical views, considerations, or influences.
+• Limited accountability:
+- As the AI is not human and drawing from a large dataset from
+various sources, accountability for an incorrect or harmful result
+may be difficult to determine.
+• Copyright infringement:
+- Datasets utilised by generative AI may have included copyrighted
+information. As a result, generated results have the potential to
+breach fair use, or infringe on copyright content.
+Users should review the Group AI Policy and any associated guidance
+notes for further information on non-cyber risks with developing or using AI
+services.
+
+Usage considerations
+Data
+considerations
+When utilising AI Chatbots:
+- Where there is no direct contractual relationship with the third-party
+supplier or Group model risk governance, data or queries
+transmitted to the service must not exceed information
+classification – Public, as defined in the IS Classification and
+Handling Standard.
+- In accordance with the Group Information Security Policy, users
+are responsible for classifying information they create, and for
+protecting classified information they handle.
+- Users are responsible to fact check output prior to internal use.
+- For transparency, users are encouraged to provide an
+acknowledgement footnote on AI generated content utilised or
+published for internal use. This may note the content as:
+- AI Chatbot output – output is raw or minimally edited.
+- AI Chatbot assisted – a draft copy was made through a
+generative AI Chatbot and revised prior to publication or
+use.
+Approach to
+usage
+To reduce potential risks or concerns that may arise when using emergent
+technologies and services, Group Cyber recommends a considered
+approach involving human participation at each stage when using
+generative AI services.
+An example approach when there is no direct contractual relationship with
+the third-party supplier or Group model risk governance:
+Consider Consider if the query has the potential to fall outside
+the Group’s risk appetite, or breach expectations
+defined in Group Policy and Standards.
+Classify Review the information classification of data or query
+to be submitted.
+Sanitise If required, sanitise, or anonymise data of any
+information that may be:
+• Group intellectual property;
+• Information classification of Confidential,
+Customer and Personal, Highly Protected; or
+• Cannot be clearly determined as information
+classification – Public.
+Submit Only submit the query after you have addressed all
+of the above.
+Review Output from generative AI should be treated as an
+initial draft only. 
+
 Review the output for considerations such as:
 • Factual accuracy;
 • Informational currency;
