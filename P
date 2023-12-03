@@ -1,0 +1,30 @@
+Commonwealth Bank of Australia (CBA) has embarked on a preliminary study to examine how well generative AI (GenAI) chatbots could emulate the behaviours of customers and be used as an early experimentation tool, ultimately to allow the bank to rapidly test, expand and improve its products and services.
+
+At South by Southwest Sydney 2023 last week, CBA Chief Decision Scientist Dan Jermyn said: “Generative AI enables machines to process, interpret and use patterns to create new outputs. We’re using this advanced technology to explore creating customer personas or ‘synthetic agents’, where GenAI chatbots act as an early experimentation tool.
+
+“By drawing on simulated experiences of daily life to emulate behaviours, we’re testing whether these GenAI chatbots could provide qualitative and quantitative understanding of how customers might respond to changing contexts, everyday financial challenges, and new products.  
+
+“It would not take away from the human input we will continue to rely on from customer research but, if proved, means we could use GenAI to enable us to get a better product or service in front of customers earlier.”
+
+Related articles
+ 
+CBA leverages AI to combat cybercrime with exponential increase in online activity
+ 
+Improving experiences for CommBank’s customers and its people with AI
+ 
+AI is already revolutionising banking — in ways you might not always see
+Mr Jermyn said his team of AI experts and behavioural scientists are looking at how GenAI could be used to test how people respond in challenging situations where customer research is typically more difficult.
+
+“We’re looking at harnessing GenAI to understand what products and services may be most needed during different types of natural disasters by simulating the actions and needs of customers during these difficult times,” he said.
+
+“We are also looking at how we can use GenAI to better understand what messaging would be most effective for helping customers in vulnerable situations – such as when customers are potentially being scammed, or when they experience a loss in the family.”
+
+Mr Jermyn said CBA’s AI and behavioural science teams were currently collaborating to test the use of GenAI to explore insights generated from behavioural science studies published outside Australia across 40 years.
+
+“We’re replicating global insights with a representative Australian sample and using GenAI to test our hypothesis in an Australian context. The preliminary study has seen us building various customer personas that can raise concerns, ask questions and identify issues, just like regular humans.
+
+“We’re testing the idea that AI-generated customer personas could potentially act as a way to rapidly pilot ideas, experiment in safe and secure environment, understand and explore the nuances of behaviours and responses of customers towards new products and messaging.
+
+“This potentially can help us understand not only how the majority could respond, but also whether there may be any unpredicted outcomes by different cohorts.
+
+“Basically, it’s about creating a safe and even smarter way of developing products and services for customers. It’s very much early days but we’re really interested about the potential opportunities GenAI has to improve customer outcomes,” said Mr Jermyn.
