@@ -67,7 +67,7 @@ services include:
 Scope This FAQ guidance paper applies to Business Units (BUs) and associated
 support functions at the Commonwealth Bank of Australia only.
 All other entities and/or regions should establish their own guidelines
-specific to their operating environments and region.
+specific to their operating environments and region.m
 Introduction
 Overview Emergent AI technologies are enabling new ways for us to engage,
 manipulate and interact with digital information expressed through
