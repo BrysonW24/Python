@@ -10,7 +10,7 @@ We have just scratched the surface of it in 3 months, as Gen.ai and CSD continue
 Commonwealth Bank of Australia (CBA) has embarked on a preliminary study to examine how well generative AI (GenAI) chatbots could emulate the behaviours of customers and be used as an early experimentation tool, ultimately to allow the bank to rapidly test, expand and improve its products and services.
 
 At South by Southwest Sydney 2023 last week, CBA Chief Decision Scientist Dan Jermyn said: “Generative AI enables machines to process, interpret and use patterns to create new outputs. We’re using this advanced technology to explore creating customer personas or ‘synthetic agents’, where GenAI chatbots act as an early experimentation tool.
-
+ 
 “By drawing on simulated experiences of daily life to emulate behaviours, we’re testing whether these GenAI chatbots could provide qualitative and quantitative understanding of how customers might respond to changing contexts, everyday financial challenges, and new products.  
 
 “It would not take away from the human input we will continue to rely on from customer research but, if proved, means we could use GenAI to enable us to get a better product or service in front of customers earlier.”
