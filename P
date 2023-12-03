@@ -28,3 +28,24 @@ Mr Jermyn said CBA’s AI and behavioural science teams were currently collabora
 “This potentially can help us understand not only how the majority could respond, but also whether there may be any unpredicted outcomes by different cohorts.
 
 “Basically, it’s about creating a safe and even smarter way of developing products and services for customers. It’s very much early days but we’re really interested about the potential opportunities GenAI has to improve customer outcomes,” said Mr Jermyn.
+
+Review the output for considerations such as:
+• Factual accuracy;
+• Informational currency;
+• Quality control;
+• Alignment to good practice;
+• Localised legal, regulatory, organisational, or
+cultural considerations;
+• Potential bias;
+• Ethical ambiguity; and
+• Alignment to Group values.
+Revise If required, revise, and repopulate output with any
+relevant Group intellectual property or information
+required for use.
+Acknowledge Consider acknowledging the use of the generative AI
+toolset within the draft or to the recipients.
+Endorse If required, have the content reviewed by a
+secondary party for endorsement (or approval) prior
+to use
+Publish Only utilise, distribute, or publish for internal use if
+you have addressed all of the above.
