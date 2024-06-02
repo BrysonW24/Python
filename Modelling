@@ -1,0 +1,318 @@
+# Define features and target variable
+churn_feature = churn.drop(['Exited','Complain'], axis=1)
+churn_label = churn['Exited']
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(churn_feature, churn_label, test_size=0.2, random_state=42)
+
+# # Split the data into training and test sets
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define classifiers
+classifiers = [
+    DecisionTreeClassifier(),
+    RandomForestClassifier(),
+    GradientBoostingClassifier(),
+    LogisticRegression()
+]
+
+# Fit, evaluate and visualise classifier models with a for loop
+classifier_names = ['Decision Tree', 'Random Forest', 'GBM', 'Logistic Regression']
+
+# Initialize storage for metrics
+results = []
+
+for clf, name in zip(classifiers, classifier_names):
+
+    # Train the model
+    clf.fit(X_train, y_train)
+
+    # Predict the response for the test dataset
+    y_pred = clf.predict(X_test)
+
+    # Create a confusion matrix
+    cm = confusion_matrix(y_test, y_pred)
+
+    # Visualise the confusion matrix
+    plt.figure(figsize=(6,6))
+    sns.heatmap(cm, annot=True, fmt='d')
+    plt.title(f'Confusion Matrix: {name}')
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.show()
+
+    # Print evaluation metrics
+    print(f"Model: {name}")
+    print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
+    print("Precision:", metrics.precision_score(y_test, y_pred))
+    print("Recall:", metrics.recall_score(y_test, y_pred))
+    print("F1 score:", metrics.f1_score(y_test, y_pred))
+
+    # Display feature importance
+    importances = clf.feature_importances_
+    indices = np.argsort(importances)
+
+    plt.figure(figsize=(12,12))
+    plt.title(f'Feature Importances: {name}')
+    plt.barh(range(len(indices)), importances[indices], color='b', align='center')
+    plt.yticks(range(len(indices)), [churn_feature.columns[i] for i in indices])
+    plt.xlabel('Relative Importance')
+    plt.show()
+    
+    # Evaluate and append results
+    results.append({
+        'Classifier': name,
+        'Precision': metrics.precision_score(y_test, y_pred),
+        'Recall': metrics.recall_score(y_test, y_pred),
+        'F1': metrics.f1_score(y_test, y_pred)
+    })
+
+# Create the comparison table
+comparison_table = pd.DataFrame(results)
+comparison_table = comparison_table.set_index('Classifier')
+
+print(comparison_table)
+
+
+------------------------------------
+# Hyperparameter Tuning
+
+**Questions for Discussion:**
+
+**Hyperparameter Tuning (HT)**: 
+
+* What are hyperparameters in machine learning models?
+
+* Give one hyperparameter example for each of the ML models you've used so far.
+
+    * Linear Regression
+
+    * Decision Tree
+
+    * Random Forest
+
+    * GBM
+
+* What does it mean to `tune` the hyperparameters and why do we do this?
+
+* How do we implement HT using sklearn?
+
+**Example answers:**
+
+What are hyperparameters in machine learning models?
+
+**Recipe Settings:** Think of a machine learning model as a recipe for making predictions about baking muffins.  Hyperparameters are like the adjustable settings on the recipe: number of eggs, oven temperature, etc. Different settings lead to different outcomes.
+
+**Not Learned By the Model:** The machine learning algorithm doesn't figure out the best hyperparameter settings by itself.  That's our job as data scientists!
+
+Give one hyperparameter example for each of the ML models you've used so far.
+
+**Linear Regression:** One key hyperparameter is the type of **regularization** used. This helps prevent the model from getting too focused on small details in the training data, which can hurt its performance on new loan applications.
+
+**Decision Tree:**  A big  one is **max_depth**.  This controls how many questions the tree can ask about a customer before making a prediction. Deeper trees can learn more complex patterns, but  risk becoming too specific to the training data.
+
+**Random Forest:** **n_estimators** is important. This is the number of individual decision trees in your "forest."  Usually, more trees are better, but they take longer to train!
+
+**GBM:** **learning_rate** is crucial. This determines how much each new tree in the GBM focuses on correcting past mistakes. A smaller learning rate might need more trees to do well.
+
+What does it mean to tune the hyperparameters and why do we do this?
+
+**Finding the 'Sweet Spot':**  Tuning is like systematically  trying different recipe settings to find the combination that leads to the _tastiest_ muffin.
+
+**Why This Matters:** The 'perfect' hyperparameter settings depend on your specific dataset. There's no one-size-fits-all recipe! Experimenting helps us pick the right settings for our particular baking project.
+
+How do we implement HT using sklearn?
+
+**Grid Search:** It's like testing a _grid_ of different settings automatically.  We say, "Hey scikit-learn, try 5, 6, and 7 for 'max_depth', try 10 and 20 for 'n_estimators', etc."
+
+**The Search Tool:** Scikit-learn has tools like `GridSearchCV` to run through all the combinations and tell us which ones worked best.
+
+----------------
+
+# Import necessary libraries
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import metrics
+
+# Read the data from CSV file
+bankloan = pd.read_csv('bankloan.csv')
+
+# Exclude 'ID' and 'ZIP.Code' columns
+bankloan = bankloan.drop(['ID', 'ZIP.Code'], axis=1)
+
+# Define features and target variable
+X = bankloan.drop('Personal.Loan', axis=1)
+y = bankloan['Personal.Loan']
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+----------
+
+# Decision tree hyperparameter tuning
+from sklearn.model_selection import GridSearchCV
+import time
+
+param_grid = {
+    'max_depth': np.arange(3, 15),
+    'min_samples_split': np.arange(2, 15),
+    'min_samples_leaf': np.arange(1, 15),
+}
+
+clf = DecisionTreeClassifier()
+
+start_time = time.time()
+
+grid_search = GridSearchCV(estimator = clf, param_grid = param_grid,
+                          cv = 3, n_jobs = -1, verbose = 2)
+
+grid_search.fit(X_train, y_train)
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+
+grid_search.best_params_
+
+# Train the model with best parameters
+best_grid = grid_search.best_estimator_
+best_grid.fit(X_train, y_train)
+
+# Visualise the decision tree
+plt.figure(figsize=(15,7.5))
+plot_tree(best_grid, filled=True, rounded=True,
+          feature_names=X.columns,
+          class_names=['No Loan','Loan'])
+plt.show()
+
+# Predict the response for the test dataset
+y_pred = best_grid.predict(X_test)
+
+# Create a confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Print evaluation metrics
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
+print("Precision:", metrics.precision_score(y_test, y_pred))
+print("Recall:", metrics.recall_score(y_test, y_pred))
+print("F1 score:", metrics.f1_score(y_test, y_pred))
+
+print(f"Hyperparameter tuning took: {elapsed_time:.2f} seconds")
+
+
+=-----------------------------------
+
+# Random forest hyperparameter tuning
+from sklearn.model_selection import GridSearchCV
+import time
+
+# Define the parameter grid
+param_grid = {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [None, 5, 10],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+}
+
+# Create a Random Forest Classifier with the parameter grid
+rf_clf = RandomForestClassifier()
+
+start_time = time.time()
+
+# Instantiate the grid search model
+grid_search = GridSearchCV(estimator=rf_clf, param_grid=param_grid, cv=3)
+
+# Fit the grid search to the data
+grid_search.fit(X_train, y_train)
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+
+# Get the best parameters
+best_params_rf = grid_search.best_params_
+
+print(f'Best parameters for Random Forest: {best_params_rf}')
+
+# Train the model with best parameters
+best_grid = grid_search.best_estimator_
+best_grid.fit(X_train, y_train)
+
+# Predict the response for the test dataset
+y_pred = best_grid.predict(X_test)
+
+# Create a confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Print evaluation metrics
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
+print("Precision:", metrics.precision_score(y_test, y_pred))
+print("Recall:", metrics.recall_score(y_test, y_pred))
+print("F1 score:", metrics.f1_score(y_test, y_pred))
+
+print(f"Hyperparameter tuning took: {elapsed_time:.2f} seconds")
+
+
+---------------------------
+
+
+# GBM hyperparameter tuning
+from sklearn.model_selection import GridSearchCV
+import time
+
+# Define the parameter grid
+param_grid = {
+    'n_estimators': [50, 100, 200],
+    'learning_rate': [0.01, 0.1, 1],
+       'max_depth': [None, 5, 10],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+}
+
+# Create a GBM Classifier with the parameter grid
+gbm_clf = GradientBoostingClassifier()
+
+start_time = time.time()
+
+# Instantiate the grid search model
+grid_search = GridSearchCV(estimator=gbm_clf, param_grid=param_grid, cv=3)
+
+# Fit the grid search to the data
+grid_search.fit(X_train, y_train)
+
+end_time = time.time()
+elapsed_time = end_time - start_time
+
+# Get the best parameters
+best_params_gbm = grid_search.best_params_
+
+print(f'Best parameters for GBM: {best_params_gbm}')
+
+# Train the model with best parameters
+best_grid = grid_search.best_estimator_
+best_grid.fit(X_train, y_train)
+
+# Predict the response for the test dataset
+y_pred = best_grid.predict(X_test)
+
+# Create a confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+
+# Visualize the confusion matrix
+sns.heatmap(cm, annot=True)
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.show()
+
+# Print evaluation metrics
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
+print("Precision:", metrics.precision_score(y_test, y_pred))
+print("Recall:", metrics.recall_score(y_test, y_pred))
+print("F1 score:", metrics.f1_score(y_test, y_pred))
+
+print(f"Hyperparameter tuning took: {elapsed_time:.2f} seconds")
