@@ -1,3 +1,35 @@
+    # Display feature importance if available
+    if hasattr(clf, 'feature_importances_'):
+        importances = clf.feature_importances_
+        indices = np.argsort(importances)
+
+        plt.figure(figsize=(12,12))
+        plt.title(f'Feature Importances: {name}')
+        plt.barh(range(len(indices)), importances[indices], color='b', align='center')
+        plt.yticks(range(len(indices)), [churn_feature.columns[i] for i in indices])
+        plt.xlabel('Relative Importance')
+        plt.show()
+    elif hasattr(clf, 'coef_'):
+        importances = np.abs(clf.coef_[0])
+        indices = np.argsort(importances)
+
+        plt.figure(figsize=(12,12))
+        plt.title(f'Feature Importances: {name}')
+        plt.barh(range(len(indices)), importances[indices], color='b', align='center')
+        plt.yticks(range(len(indices)), [churn_feature.columns[i] for i in indices])
+        plt.xlabel('Coefficient Magnitude')
+        plt.show()
+
+
+
+
+
+
+
+
+
+
+
 # Define features and target variable
 churn_feature = churn.drop(['Exited','Complain'], axis=1)
 churn_label = churn['Exited']
