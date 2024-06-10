@@ -1,0 +1,77 @@
+# Define classifiers 
+classifiers = [
+    LogisticRegression(max_iter=1000),
+    GradientBoostingClassifier(),
+    SVC(kernel='linear', probability=True),
+    SVC(kernel='rbf', probability=True),
+    KNeighborsClassifier(),
+    DecisionTreeClassifier(),
+    RandomForestClassifier(),
+    MLPClassifier(max_iter=1000)
+]
+
+# Classifier names
+classifier_names = [
+    "Logistic Regression", "Gradient Boosting", "SVM (Linear)", "SVM (RBF)",
+    "K-Nearest Neighbours (k-NN)", "Decision Tree", "Random Forest", "Neural Network"
+]
+
+# Initialize storage for metrics
+results = []
+
+# Fit, evaluate, and visualize classifiers 
+for clf, name in zip(classifiers, classifier_names):
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+    y_prob = clf.predict_proba(X_test)[:, 1] if hasattr(clf, "predict_proba") else None
+
+    # Collect metrics
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
+    roc_auc = roc_auc_score(y_test, y_prob) if y_prob is not None else None
+
+    results.append({
+        "Model": name,
+        "Accuracy": round(accuracy,4),
+        "Precision_Score": round(precision,4),
+        "Recall_Score": round(recall,4),
+        "F1_Score": round(f1,4),
+        "ROC_AUC": round(roc_auc,4)
+    })
+
+# Create DataFrame
+comparison_table = pd.DataFrame(results)
+
+# Print the comparison table
+print(comparison_table)
+
+# Plot the table
+fig, ax = plt.subplots(figsize=(14, 8))  # Set the figure size
+ax.axis('tight')
+ax.axis('off')
+
+# Table
+table = ax.table(cellText=comparison_table.values, colLabels=comparison_table.columns, cellLoc='center', loc='center')
+
+# Styling the table
+table.auto_set_font_size(False)
+table.set_fontsize(14)
+table.scale(1.5, 1.5)
+
+# Set colors for header
+for j in range(len(comparison_table.columns)):
+    table[0, j].set_fontsize(12)
+    table[0, j].set_text_props(weight='bold')
+    table[0, j].set_facecolor('#40466e')
+    table[0, j].set_text_props(color='white')
+
+# Define the indices of the rows you want to highlight 
+highlight_rows = [1, 3, 5, 7]  # Change these to the indices of the rows you want to highlight
+
+for highlight_row in highlight_rows:
+    for i in range(len(comparison_table.columns)):
+        table[highlight_row, i].set_facecolor('#c5c5e5')
+
+plt.show()
