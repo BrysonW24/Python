@@ -1,97 +1,22 @@
-# Hyperparameter tuning for decision tree with random search
-from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.metrics import accuracy_score, make_scorer
-
-# Gradient Boosting hyperparameter tuning
-
-name = "Gradient Boosting"
-
-# Define the parameter grid
-param_grid = {
+# Define hyperparameter grids
+param_grids = {
+"Gradient Boosting": {
     'n_estimators': range(50, 150, 10),
-    'max_depth': (range(1, 20)),
-    'min_samples_split': range(2, 20),
-    'min_samples_leaf': range(1, 20),
-    'max_features': ['auto', 'sqrt', 'log2'],
-    'max_leaf_nodes': (range(1, 20)),
-    'criterion': ['friedman_mse', 'mse', 'mae'],
-    'loss': ['deviance', 'exponential'],
-    'subsample': np.arange(0.1, 1.1, 0.1),
-    'learning_rate': np.arange(0.1, 1.1, 0.1)
-}
-
-# Create a GBM Classifier with the parameter grid
-gbm_clf = GradientBoostingClassifier()   # random_state=17052024
-
-# we will use multiple scoring metrics
-scoring = {"Acc": make_scorer(accuracy_score), "F1": "f1", "Recall": "recall", "Precision": "precision", "AUC": "roc_auc"}
-
-# Instantiate the grid search model
-# grid_search = GridSearchCV(estimator=gbm_clf, param_grid=param_grid, cv=3)
-
-# Define random search
-random_search = RandomizedSearchCV(estimator=gbm_clf, 
-                                   param_distributions=param_grid, cv=5, n_jobs=-1,
-                                    n_iter=500, scoring=scoring, verbose=1, refit="F1")
-
-# Fit the grid search to the data
-# grid_search.fit(X_train, y_train)    # this takes 45 minutes
-random_search.fit(X_train, y_train)
-
-# Get the best parameters
-best_params_gbm = random_search.best_params_
-
-print(f'Best parameters for GBM: /n {best_params_gbm}')
-
-# Train the model with best parameters
-#best_grid = grid_search.best_estimator_
-best_grid = random_search.best_estimator_
-best_grid.fit(X_train, y_train)
-
-# Model Evaluation
-y_pred = best_grid.predict(X_test)
-y_pred_proba = best_grid.predict_proba(X_test)[:, 1]
-
-# Plot ROC Curve
-fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
-plt.figure(figsize=(10, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc_score(y_test, y_pred_proba):.2f})')
-plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Characteristic - Gradient Boosting')
-plt.legend(loc="lower right")
-plt.show()
-
-# Create a confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-plt.title('Confusion Matrix')
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.show()
-
-# Print evaluation metrics
-print("Classification Report:\n")
-print(classification_report(y_test, y_pred))
-print('--------------------------------')
-print(f"Model: {name}")
-print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
-print("Precision:", metrics.precision_score(y_test, y_pred))
-print("Recall:", metrics.recall_score(y_test, y_pred))
-print("F1 score:", metrics.f1_score(y_test, y_pred))
-
-
-
-# Random forest hyperparameter tuning
-
-name = "Random Forest"
-
-# Define the parameter grid
-param_grid = {
+    # 'max_depth': range(1, 20),
+    # 'min_samples_split': range(2, 20),
+    # 'min_samples_leaf': range(1, 20),
+    # 'max_features': ['auto', 'sqrt', 'log2'],
+    # 'max_leaf_nodes': range(1, 20),
+    # 'criterion': ['friedman_mse', 'mse', 'mae'],
+    # 'loss': ['deviance', 'exponential'],
+    # 'subsample': np.arange(0.1, 1.1, 0.1),
+    'learning_rate': np.arange(0.1, 1.1, 0.1) }, "Random Forest": {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [None, 5, 10],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+},
+"Random Forest": {
     # 'n_estimators': range(50, 150, 10),
     # 'max_depth': (range(1, 20)),
     # 'min_samples_split': range(2, 20),
@@ -104,143 +29,23 @@ param_grid = {
     'max_depth': [None, 5, 10],
     'min_samples_split': [2, 5, 10],
     'min_samples_leaf': [1, 2, 4]
-}
-
-# Create a Random Forest Classifier with the parameter grid
-rf_clf = RandomForestClassifier(random_state=17052024)
-
-# Instantiate the grid search model
-grid_search = GridSearchCV(estimator=rf_clf, param_grid=param_grid, cv=3)
-
-# Fit the grid search to the data
-grid_search.fit(X_train, y_train)
-
-# Get the best parameters
-best_params_rf = grid_search.best_params_
-
-print(f'Best parameters for Random Forest: {best_params_rf}')
-
-# Train the model with best parameters
-best_grid = grid_search.best_estimator_
-best_grid.fit(X_train, y_train)
-
-# Model Evaluation
-y_pred = best_grid.predict(X_test)
-y_pred_proba = best_grid.predict_proba(X_test)[:, 1]
-
-# Plot ROC Curve
-fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
-plt.figure(figsize=(10, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc_score(y_test, y_pred_proba):.2f})')
-plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Characteristic - Random Forest')
-plt.legend(loc="lower right")
-plt.show()
-
-# Create a confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-plt.title('Confusion Matrix')
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.show()
-
-# Print evaluation metrics
-print("Classification Report:\n")
-print(classification_report(y_test, y_pred))
-print('--------------------------------')
-print(f"Model: {name}")
-print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
-print("Precision:", metrics.precision_score(y_test, y_pred))
-print("Recall:", metrics.recall_score(y_test, y_pred))
-print("F1 score:", metrics.f1_score(y_test, y_pred))
-
-
-# Extreme Gradient Boosting hyperparameter tuning
-
-name = "Extreme Gradient Boosting"
-
-# Define the parameter grid
-param_grid = {
+},
+"Extreme Gradient Boosting": {
     'n_estimators': range(50, 150, 10),
-    'max_depth': (range(1, 20)),
+    # 'max_depth': range(1, 20),
+    # 'min_samples_split': range(2, 20),
+    # 'min_samples_leaf': range(1, 20),
+    # 'max_features': ['auto', 'sqrt', 'log2'],
+    # 'max_leaf_nodes': range(1, 20),
+    # 'criterion': ['friedman_mse', 'mse', 'mae'],
+    # 'loss': ['deviance', 'exponential'],
+    # 'subsample': np.arange(0.1, 1.1, 0.1),
+    'learning_rate': np.arange(0.1, 1.1, 0.1) }, "Decision Tree": {
+    'max_depth': range(1, 20),
     'min_samples_split': range(2, 20),
-    'min_samples_leaf': range(1, 20),
-    'max_features': ['auto', 'sqrt', 'log2'],
-    'max_leaf_nodes': (range(1, 20)),
-    'criterion': ['friedman_mse', 'mse', 'mae'],
-    'loss': ['deviance', 'exponential'],
-    'subsample': np.arange(0.1, 1.1, 0.1),
-    'learning_rate': np.arange(0.1, 1.1, 0.1)
-}
-
-# Create a GBM Classifier with the parameter grid
-xgbm_clf = XGBClassifier()
-
-# Instantiate the grid search model
-#grid_search = GridSearchCV(estimator=xgbm_clf, param_grid=param_grid, cv=3)
-random_search = RandomizedSearchCV(estimator=xgbm_clf, 
-                                   param_distributions=param_grid, cv=5, n_jobs=-1,
-                                    n_iter=500, scoring=scoring, verbose=1, refit="F1")
-
-# Fit the grid search to the data
-# grid_search.fit(X_train, y_train)
-random_search.fit(X_train, y_train)
-
-# Get the best parameters
-best_params_xgbm = random_search.best_params_
-
-print(f'Best parameters for xGBM: {best_params_xgbm}')
-
-# Train the model with best parameters
-best_grid = random_search.best_estimator_
-best_grid.fit(X_train, y_train)
-
-# Model Evaluation
-y_pred = best_grid.predict(X_test)
-y_pred_proba = best_grid.predict_proba(X_test)[:, 1]
-
-# Plot ROC Curve
-fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
-plt.figure(figsize=(10, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc_score(y_test, y_pred_proba):.2f})')
-plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Characteristic - Random Forest')
-plt.legend(loc="lower right")
-plt.show()
-
-# Create a confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-plt.title('Confusion Matrix')
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.show()
-
-# Print evaluation metrics
-print("Classification Report:\n")
-print(classification_report(y_test, y_pred))
-print('--------------------------------')
-print(f"Model: {name}")
-print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
-print("Precision:", metrics.precision_score(y_test, y_pred))
-print("Recall:", metrics.recall_score(y_test, y_pred))
-print("F1 score:", metrics.f1_score(y_test, y_pred))
-
-
-# Decision tree hyperparameter tuning
-
-name = "Decision Tree"
-
-param_grid = {
+    'min_samples_leaf': range(1, 20)
+},
+"Decision Tree": {
     # 'max_depth': (range(1, 20)),
     # 'min_samples_split': range(2, 20),
     # 'min_samples_leaf': range(1, 20),
@@ -252,62 +57,126 @@ param_grid = {
     'min_samples_split': np.arange(2, 8, 15),
     'min_samples_leaf': np.arange(1, 6, 15),
 }
+}
 
-# Create a Decision Tree Classifier with the parameter grid
-clf = DecisionTreeClassifier() #random_state=17052024
+# Define models
+models = {
+"Gradient Boosting": GradientBoostingClassifier(), "Random Forest": RandomForestClassifier(),   # random_state=17052024
+"Extreme Gradient Boosting": XGBClassifier(), "Decision Tree": DecisionTreeClassifier() }
 
-grid_search = GridSearchCV(estimator = clf, param_grid = param_grid, 
-                          cv = 3, n_jobs = -1, verbose = 2)
+# Define scoring
+scoring = {
+    "Acc": make_scorer(accuracy_score),
+    "F1": "f1",
+    "Recall": "recall",
+    "Precision": "precision",
+    "ROC_AUC": "roc_auc"
+}
 
-# Fit the grid search to the data
-grid_search.fit(X_train, y_train)
+# Initialize storage for metrics
+ht_results = []
 
-# Get the best parameters
-best_params_dt = grid_search.best_params_
-print(f'Best parameters for Random Forest: {best_params_dt}')
+# Storage for ROC curve data
+ht_roc_data = []
 
-# Train the model with best parameters
-best_grid = grid_search.best_estimator_
-best_grid.fit(X_train, y_train)
 
-# Visualise the decision tree
-plt.figure(figsize=(15,7.5))
-plot_tree(best_grid, filled=True, rounded=True,
-          feature_names=df_feature.columns,
-          class_names=['Non-Churner','Churner'])
-plt.show()
+def perform_random_search(name, model, param_grid, X_train, y_train):
+    random_search = RandomizedSearchCV(estimator=model,
+    param_distributions=param_grid,
+    cv=5, n_jobs=-1, n_iter=500,
+    scoring=scoring, verbose=1, refit="F1")
+    random_search.fit(X_train, y_train)
+    return random_search.best_params_, random_search.best_estimator_
 
-# Model Evaluation
-y_pred = best_grid.predict(X_test)
-y_pred_proba = best_grid.predict_proba(X_test)[:, 1]
+def perform_grid_search(name, model, param_grid, X_train, y_train):
+    grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=3) 
+    grid_search.fit(X_train, y_train) 
+    return grid_search.best_params_, grid_search.best_estimator_
 
-# Plot ROC Curve
-fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
-plt.figure(figsize=(10, 6))
-plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc_score(y_test, y_pred_proba):.2f})')
-plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-plt.xlim([0.0, 1.0])
+def evaluate_model(name, model, X_test, y_test):
+    y_pred = model.predict(X_test)
+    y_pred_proba = model.predict_proba(X_test)[:, 1]
+  
+    # Collect metrics
+    accuracy =  metrics.accuracy_score(y_test, y_pred)
+    precision = metrics.precision_score(y_test, y_pred)
+    recall = metrics.recall_score(y_test, y_pred)
+    f1 = metrics.f1_score(y_test, y_pred)
+    # Calculate ROC/AUC
+    fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
+    roc_auc = auc(fpr, tpr)
+    
+    ht_results.append({
+        "Model": name,
+        "Accuracy": round(accuracy, 4),
+        "Precision_Score": round(precision, 4),
+        "Recall_Score": round(recall, 4),
+        "F1_Score": round(f1, 4),
+        "ROC_AUC": round(roc_auc, 4) if roc_auc is not None else "N/A"
+    })
+
+    if y_prob is not None:
+        ht_roc_data.append((fpr, tpr, roc_auc, name))
+    
+    plt.figure(figsize=(10, 6)) 
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc_score(y_test, y_pred_proba):.2f})') 
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--') 
+    plt.xlim([0.0, 1.0]) 
+    plt.ylim([0.0, 1.05]) 
+    plt.xlabel('False Positive Rate') 
+    plt.ylabel('True Positive Rate') 
+    plt.title(f'Receiver Operating Characteristic - {name}') 
+    plt.legend(loc="lower right")
+    plt.show()
+    
+    cm = confusion_matrix(y_test, y_pred)
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues') 
+    plt.title('Confusion Matrix')
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.show()
+    
+    print("Classification Report:\n")
+    print(classification_report(y_test, y_pred))
+    print('--------------------------------')
+
+    print(f"Model: {name}")
+    print("Accuracy:", accuracy_score(y_test, y_pred)) 
+    print("Precision:", metrics.precision_score(y_test, y_pred)) 
+    print("Recall:", metrics.recall_score(y_test, y_pred))
+    print("F1 score:", metrics.f1_score(y_test, y_pred))
+    print("ROC_AUC:", metrics.f1_score(y_test, y_pred))
+
+# Train and evaluate models
+for name, model in models.items():
+    param_grid = param_grids[name]
+    if name in ["Gradient Boosting", "Extreme Gradient Boosting"]:
+        best_params, best_model = perform_random_search(name, model, param_grid, X_train, y_train)
+    else:
+        best_params, best_model = perform_grid_search(name, model, param_grid, X_train, y_train)
+    print(f'Best parameters for {name}: {best_params}') 
+    best_model.fit(X_train, y_train) 
+    evaluate_model(name, best_model, X_test, y_test)
+
+    if name == "Decision Tree":
+        plt.figure(figsize=(15,7.5))
+        plot_tree(best_model, filled=True, rounded=True, feature_names=X_train.columns, class_names=['Non-Churner', 'Churner'])
+        plt.show()
+
+# Plot all ROC curves on the same graph
+plt.figure(figsize=(10, 8))
+for fpr, tpr, roc_auc, name in ht_roc_data:
+    plt.plot(fpr, tpr, lw=2, label='%s (AUC = %0.2f)' % (name, roc_auc))
+    
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--') 
+plt.xlim([0.0, 1.0]) 
 plt.ylim([0.0, 1.05])
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Characteristic - Decision Tree')
-plt.legend(loc="lower right")
+plt.title('ROC Curve')
+plt.legend()
 plt.show()
 
-# Create a confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
-plt.title('Confusion Matrix')
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.show()
-
-# Print evaluation metrics
-print("Classification Report:\n")
-print(classification_report(y_test, y_pred))
-print('--------------------------------')
-print(f"Model: {name}")
-print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
-print("Precision:", metrics.precision_score(y_test, y_pred))
-print("Recall:", metrics.recall_score(y_test, y_pred))
-print("F1 score:", metrics.f1_score(y_test, y_pred))
+# Create DataFrame
+ht_comparison_table = pd.DataFrame(ht_results)
+ht_comparison_table
