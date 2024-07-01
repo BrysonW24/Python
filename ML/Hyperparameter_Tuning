@@ -1,0 +1,162 @@
+# Define hyperparameter grids
+param_grids = {
+"Gradient Boosting": {
+    'learning_rate': np.arange(0.1, 1.5, 0.1),
+    'n_estimators': range(50, 200, 10),
+    'max_depth': range(1, 20),
+    'min_samples_split': range(2, 20),
+    'min_samples_leaf': range(1, 20),
+    # 'max_features': ['auto', 'sqrt', 'log2'],
+    # 'max_leaf_nodes': range(1, 20),
+    # 'criterion': ['friedman_mse', 'mse', 'mae'],
+    # 'loss': ['deviance', 'exponential'],
+    # 'subsample': np.arange(0.1, 1.1, 0.1),
+},
+"Random Forest": {
+    'n_estimators': range(50, 200, 10),
+    'max_depth': [None, 5, 10],
+    'min_samples_split': [2, 5, 10],
+    'min_samples_leaf': [1, 2, 4]
+    # 'max_depth': (range(1, 20)),
+    # 'min_samples_split': range(2, 20),
+    # 'min_samples_leaf': range(1, 20),
+    # 'max_features': ['auto', 'sqrt', 'log2'],
+    # 'max_leaf_nodes': (range(1, 20)),
+    # 'class_weight': ['balanced', 'balanced_subsample', None],
+    # 'criterion': ['gini', 'entropy']
+},
+"Decision Tree": {
+    'max_depth': (range(1, 20)),
+    'min_samples_split': range(2, 20),
+    'min_samples_leaf': range(1, 20),
+    # 'max_features': ['auto', 'sqrt', 'log2'],
+    'max_leaf_nodes': (range(1, 20)),
+    # 'class_weight': ['balanced', None],
+    # 'criterion': ['gini', 'entropy']
+},
+}
+
+# Define models
+models = {
+    "Gradient Boosting": GradientBoostingClassifier(), 
+    "Random Forest": RandomForestClassifier(),   # random_state=17052024
+    "Decision Tree": DecisionTreeClassifier() }
+
+# Define scoring
+scoring = {
+    "Acc": make_scorer(accuracy_score),
+    "F1": "f1",
+    "Recall": "recall",
+    "Precision": "precision",
+    "ROC_AUC": "roc_auc"
+}
+
+# Initialize storage for metrics
+ht_results = []
+
+# Storage for ROC curve data
+ht_roc_data = []
+
+
+def perform_random_search(name, model, param_grid, X_train, y_train):
+    random_search = RandomizedSearchCV(estimator=model,
+    param_distributions=param_grid,
+    cv=5, n_jobs=-1, n_iter=1000,
+    scoring=scoring, verbose=1, refit="F1")
+    random_search.fit(X_train, y_train)
+    return random_search.best_params_, random_search.best_estimator_
+
+def perform_grid_search(name, model, param_grid, X_train, y_train):
+    grid_search = GridSearchCV(estimator=model, param_grid=param_grid, cv=3) 
+    grid_search.fit(X_train, y_train) 
+    return grid_search.best_params_, grid_search.best_estimator_
+
+def evaluate_model(name, model, X_test, y_test):
+    y_pred = model.predict(X_test)
+    y_pred_proba = model.predict_proba(X_test)[:, 1]
+  
+    # Collect metrics
+    accuracy =  metrics.accuracy_score(y_test, y_pred)
+    precision = metrics.precision_score(y_test, y_pred)
+    recall = metrics.recall_score(y_test, y_pred)
+    f1 = metrics.f1_score(y_test, y_pred)
+    # Calculate ROC/AUC
+    fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
+    roc_auc = auc(fpr, tpr)
+    
+    ht_results.append({
+        "Model": name,
+        "Accuracy": round(accuracy, 4),
+        "Precision_Score": round(precision, 4),
+        "Recall_Score": round(recall, 4),
+        "F1_Score": round(f1, 4),
+        "ROC_AUC": round(roc_auc, 4) if roc_auc is not None else "N/A"
+    })
+
+    if y_pred_proba is not None:
+        ht_roc_data.append((fpr, tpr, roc_auc, name))
+    
+    plt.figure(figsize=(10, 6)) 
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (area = {roc_auc_score(y_test, y_pred_proba):.2f})') 
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--') 
+    plt.xlim([0.0, 1.0]) 
+    plt.ylim([0.0, 1.05]) 
+    plt.xlabel('False Positive Rate') 
+    plt.ylabel('True Positive Rate') 
+    plt.title(f'Receiver Operating Characteristic - {name}') 
+    plt.legend(loc="lower right")
+    plt.show()
+    
+    cm = confusion_matrix(y_test, y_pred)
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues') 
+    plt.title('Confusion Matrix')
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.show()
+    
+    print("Classification Report:\n")
+    print(classification_report(y_test, y_pred))
+    print('--------------------------------')
+
+    print(f"Model: {name}")
+    print("Accuracy:", accuracy_score(y_test, y_pred)) 
+    print("Precision:", metrics.precision_score(y_test, y_pred)) 
+    print("Recall:", metrics.recall_score(y_test, y_pred))
+    print("F1 score:", metrics.f1_score(y_test, y_pred))
+    #print("ROC AUC score:", roc_auc(y_test, y_pred))
+
+# Train and evaluate models
+for name, model in models.items():
+    param_grid = param_grids[name]
+    if name in ["Gradient Boosting"]:
+        best_params, best_model = perform_random_search(name, model, param_grid, X_train, y_train)
+    else:
+        best_params, best_model = perform_grid_search(name, model, param_grid, X_train, y_train)
+    print(f'Best parameters for {name}: {best_params}') 
+    best_model.fit(X_train, y_train) 
+    evaluate_model(name, best_model, X_test, y_test)
+
+    if name == "Decision Tree":
+        plt.figure(figsize=(15,7.5))
+        plot_tree(best_model, filled=True, rounded=True, feature_names=X_train.columns, class_names=['Non-Churner', 'Churner'])
+        plt.show()
+
+# Plot all ROC curves on the same graph
+plt.figure(figsize=(10, 8))
+for fpr, tpr, roc_auc, name in ht_roc_data:
+    plt.plot(fpr, tpr, lw=2, label='%s (AUC = %0.2f)' % (name, roc_auc))
+    
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--') 
+plt.xlim([0.0, 1.0]) 
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve')
+plt.legend()
+plt.show()
+
+# Create DataFrame
+ht_comparison_table = pd.DataFrame(ht_results)
+ht_comparison_table
+
+BrokenProcessPool: A task has failed to un-serialize. Please ensure that the arguments of the function are all picklable.
